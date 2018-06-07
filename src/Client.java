@@ -37,10 +37,11 @@ public class Client
             if(receivedData[0] == 0 && receivedData[1] == 4)
             {
                 System.out.println("ACK");
+                System.out.println("Sending : " + nomFichier);
             }
             else if(receivedData[0] == 0 && receivedData[1] == 5)
             {
-                System.out.println("Erreur");
+                afficherErreur(receivedData[3]);
             }
 
         }
@@ -50,6 +51,35 @@ public class Client
         }
 
     }
+
+    public static void afficherErreur(byte codeErreur)
+    {
+        System.out.println("-- Error --");
+        //Code
+        switch(codeErreur)
+        {
+            case 1 :
+                System.out.println("File not found");
+            break;
+
+            case 2 :
+                System.out.println("Access violation");
+            break;
+
+            case 3 :
+                System.out.println("Disk full");
+            break;
+
+            case 4 :
+                System.out.println("Illegal TFTP operation");
+            break;
+
+            case 6:
+                System.out.println("File already exists");
+            break;
+        }
+    }
+
 
     public static byte[] createRequestPacket(String nomFichier)
     {
