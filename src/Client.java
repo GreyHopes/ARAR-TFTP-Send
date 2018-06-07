@@ -33,9 +33,16 @@ public class Client
             byte[] receivedData = dp.getData();
             portServer = dp.getPort();
 
-            System.out.println("Debug");
-            System.out.println("Port " + dp.getPort());
-            System.out.println("Adresse " + dp.getAddress());
+            //On vérifie si on a bien reçu un ACK
+            if(receivedData[0] == 0 && receivedData[1] == 4)
+            {
+                System.out.println("ACK");
+            }
+            else if(receivedData[0] == 0 && receivedData[1] == 5)
+            {
+                System.out.println("Erreur");
+            }
+
         }
         catch(Exception e)
         {
