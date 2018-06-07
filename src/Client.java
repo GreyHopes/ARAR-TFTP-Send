@@ -28,7 +28,11 @@ public class Client
             DatagramPacket dp = new DatagramPacket(requestPacket,requestPacket.length,adresse,portServer);
             ds.send(dp);
 
-            
+            //Reception premier ACK
+            ds.receive(dp);
+            byte[] receivedData = dp.getData();
+            portServer = dp.getPort();
+
             System.out.println("Debug");
             System.out.println("Port " + dp.getPort());
             System.out.println("Adresse " + dp.getAddress());
